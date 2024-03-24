@@ -8,7 +8,7 @@ const Chart = ({ data }) => {
     if (data && data.length > 0) {
       const chart = createChart(chartContainerRef.current, {
         width: 800,
-        height: 600,
+        height: 500,
         rightPriceScale: {
           visible: false,
         },
@@ -33,7 +33,7 @@ const Chart = ({ data }) => {
         })
       }
 
-      window.addEventListener('resize', handleResize);
+      // window.addEventListener('resize', handleResize);
       const formattedData = data.map(({ date, cumsum, }) => ({
         time: date,
         value: cumsum,
@@ -41,14 +41,13 @@ const Chart = ({ data }) => {
 
       lineSeries.setData(formattedData);
 
-      return () => {
-        chart.remove();
-        window.removeEventListener('resize', handleResize)
+      return () => chart.remove();
+      //   window.removeEventListener('resize', handleResize)
       }
-    }
+    
   }, [data]);
 
-  return <div ref={chartContainerRef} style={{ height: '400px' }} />;
+  return <div className='w-full h-screen m-0 p-0' ref={chartContainerRef} />;
 };
 
 export default Chart;
