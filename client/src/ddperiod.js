@@ -1,4 +1,4 @@
-const periods = {
+export const period = {
     "status": true,
     "error": false,
     "data": [
@@ -71,5 +71,3 @@ const periods = {
     ],
     "message": "Data received"
 }
-
-export default periods;
