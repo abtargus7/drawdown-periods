@@ -1,4 +1,4 @@
-{
+const cdata = {
     "status": true,
     "error": false,
     "data": {
@@ -647,3 +647,5 @@
     },
     "message": "Data received"
 }
+
+export default cdata;

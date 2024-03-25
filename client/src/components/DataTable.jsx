@@ -1,12 +1,24 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
+import period from '../ddperiod';
 
 function DataTable() {
+
+    const [periods, setPeriods] = useState([]);
+
+    useEffect(() => {
+    
+        const periodData = period.data;
+        console.log(periodData);
+        setPeriods(periodData);
+    }, [])
+
+
 
 
     return (
         <div className='tdata rounded-3xl'>
-            <table className='shadow-lg bg-white'>
+            <table className='shadow-lg bg-white text-xs'>
                 <thead>
                     <tr>
                         <th className='bg-blue-100 border text-left px-8 py-4'>Date Range</th>
@@ -15,10 +27,15 @@ function DataTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className='border px-8 py-4'>2024-01-01 to 2024-01-31</td>
-                        <td className='border px-8 py-4'>10%</td>
-                        <td className='border px-8 py-4'>30</td>
+                    {periods.map( (per) => {
+                        return <tr>
+                        <td className='border px-8 py-4'>{per.Start_Date} - {per.End_Date}</td>
+                        <td className='border px-8 py-4 text-red-600'>{parseFloat(per.Max_Drawdown).toFixed(2)}</td>
+                        <td className='border px-8 py-4'>{per.Drawdown_days}</td>
+                        </tr>
+                    })}
+                    {/* <tr>
+                       
                     </tr>
                     <tr>
                         <td className='border px-8 py-4'>2024-02-01 to 2024-02-29</td>
@@ -39,7 +56,7 @@ function DataTable() {
                         <td className='border px-8 py-4'>2024-05-01 to 2024-05-31</td>
                         <td className='border px-8 py-4'>15%</td>
                         <td className='border px-8 py-4'>40</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </table>
         </div>

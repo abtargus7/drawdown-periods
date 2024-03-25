@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Chart from './Chart';
 import data from '../data';
 import DataTable from './DataTable';
 
 const App = () => {
+
+  // const fetchdata = async () => {
+  //   const data = await fetch('/api');
+  //   const jsonData = await data.json();
+  //   console.log(jsonData);
+  //   // setNotes(jsonData);
+  // }
+
+  // useEffect(() => {
+  //   fetchdata();
+  //   // console.log(notes);
+  // }, []);
 
   return (
 
