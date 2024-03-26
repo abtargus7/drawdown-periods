@@ -9,7 +9,7 @@ export const Logo = () => {
         zIndex: 20,
         color: "black"
       }}>
-        <img className='w-24' src='maticLogoBlack.png'></img>
+        <img className='w-24' src='./maticLogoBlack.png'></img>
       </div>
   )
 }
