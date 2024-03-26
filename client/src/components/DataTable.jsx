@@ -15,7 +15,7 @@ export const DataTable = () => {
             <table className='shadow-lg bg-white rounded-2xl'>
                 <thead>
                     <tr>
-                        <th className='bg-gray-100 border text-left px-8 py-4'>Date Range</th>
+                        <th className='bg-gray-100 border text-left px-8 py-4'>Period</th>
                         <th className='bg-gray-100 border text-left px-8 py-4'>Max DD</th>
                         <th className='bg-gray-100 border text-left px-8 py-4'>Days</th>
                     </tr>
