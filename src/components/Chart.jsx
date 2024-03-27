@@ -9,7 +9,7 @@ export const Chart = ({ data, periodData }) => {
     if (data && data.length > 0) {
       const chart = createChart(chartContainerRef.current, {
         width: 800,
-        height: 500,
+        height: 450,
         rightPriceScale: {
           visible: false,
         },
@@ -133,7 +133,7 @@ export const Chart = ({ data, periodData }) => {
 
   }, []);
 
-  return <div className='w-full h-screen m-0 p-0 relative' ref={chartContainerRef}>
+  return <div className='w-full h-2/3 m-0 p-0 relative' ref={chartContainerRef}>
     <Logo />
   </div>;
 };

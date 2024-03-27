@@ -4,7 +4,7 @@ export const Logo = () => {
   return (
     <div style={{
         position: "absolute",
-        top: 410,
+        top: 350,
         left: 620,
         zIndex: 20,
         color: "black"

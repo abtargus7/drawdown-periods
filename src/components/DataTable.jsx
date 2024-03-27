@@ -10,9 +10,8 @@ export const DataTable = () => {
         setPeriods(periodData);
     }, [])
 
-    return (
-        <div className='tdata'>
-            <table className='shadow-lg bg-white rounded-2xl'>
+    return (                    
+            <table className='shadow-lg bg-white max-h-96' >
                 <thead>
                     <tr>
                         <th className='bg-gray-100 border text-left px-8 py-4'>Period</th>
@@ -30,6 +29,6 @@ export const DataTable = () => {
                     })}
                 </tbody>
             </table>
-        </div>
+
     )
 }
