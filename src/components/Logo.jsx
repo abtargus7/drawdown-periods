@@ -6,8 +6,9 @@ export const Logo = () => {
         position: "absolute",
         top: 350,
         left: 620,
-        zIndex: 20,
-        color: "black"
+        zIndex: 2,
+        color: "black",
+        opacity: 0.4
       }}>
         <img className='w-24' src='./maticLogoBlack.png'></img>
       </div>
