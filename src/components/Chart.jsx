@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createChart } from 'lightweight-charts';
-import {Logo} from './Logo';
+import { Logo } from './Logo';
 
 export const Chart = ({ data, periodData }) => {
   const chartContainerRef = useRef(null);
+  const tooltipRef = useRef(null);
+
+  const [linePrice, setLinePrice] = useState(null);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -16,7 +19,6 @@ export const Chart = ({ data, periodData }) => {
         leftPriceScale: {
           visible: true,
         },
-        
       });
 
       const lineSeries = chart.addAreaSeries({
@@ -39,42 +41,41 @@ export const Chart = ({ data, periodData }) => {
         topColor: '#FFC9C9',
         bottomColor: 'white',
         priceLineVisible: false,
-      })  
+      })
 
       const periodSeries3 = chart.addAreaSeries({
         lineColor: '#f44336',
         topColor: '#FFC9C9',
         bottomColor: 'white',
         priceLineVisible: false,
-      })  
+      })
 
       const periodSeries4 = chart.addAreaSeries({
         lineColor: '#f44336',
         topColor: '#FFC9C9',
         bottomColor: 'white',
         priceLineVisible: false,
-      })  
+      })
 
       const periodSeries5 = chart.addAreaSeries({
         lineColor: '#f44336',
         topColor: '#FFC9C9',
         bottomColor: 'white',
         priceLineVisible: false,
-      })  
+      })
 
       const periodSeries6 = chart.addAreaSeries({
         lineColor: '#f44336',
         topColor: '#FFC9C9',
         bottomColor: 'white',
         priceLineVisible: false,
-      })  
+      })
 
       lineSeries.priceScale().applyOptions({
         textColor: 'gray',
         borderColor: '#C0C0C0',
       })
 
-   
       chart.timeScale().applyOptions({
         borderColor: '#C0C0C0',
         textColor: 'gray',
@@ -88,37 +89,49 @@ export const Chart = ({ data, periodData }) => {
         value: cumsum,
       }));
 
-      const periodSeriesData1 = periodData.period1.map(({date, cumsum}) => ({
+      const periodSeriesData1 = periodData.period1.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
-      const periodSeriesData2 = periodData.period2.map(({date, cumsum}) => ({
+      const periodSeriesData2 = periodData.period2.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
-      const periodSeriesData3 = periodData.period3.map(({date, cumsum}) => ({
+      const periodSeriesData3 = periodData.period3.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
-      const periodSeriesData4 = periodData.period4.map(({date, cumsum}) => ({
+      const periodSeriesData4 = periodData.period4.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
-      const periodSeriesData5 = periodData.period5.map(({date, cumsum}) => ({
+      const periodSeriesData5 = periodData.period5.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
-      const periodSeriesData6 = periodData.period6.map(({date, cumsum}) => ({
+      const periodSeriesData6 = periodData.period6.map(({ date, cumsum }) => ({
         time: date,
         value: cumsum
       }))
 
+      chart.subscribeCrosshairMove(param => {
+        if (param.time) {
+          const data = param.seriesData.get(lineSeries);
 
+          const coordinate = lineSeries.priceToCoordinate(data.value) - 115;
+          const shiftedCoordinate = param.point.x;
+
+          tooltipRef.current.style.left = shiftedCoordinate + 'px';
+          tooltipRef.current.style.top = coordinate + 'px';
+
+          setLinePrice(data);
+        }
+      });
 
       lineSeries.setData(formattedData);
       periodSeries1.setData(periodSeriesData1);
@@ -134,6 +147,29 @@ export const Chart = ({ data, periodData }) => {
   }, []);
 
   return <div className='w-full h-2/3 m-0 p-0 relative' ref={chartContainerRef}>
+    <div ref={tooltipRef} style={{
+      position: "absolute",
+      width: 100,
+      height: 100,
+      border: "1px solid blue",
+      zIndex: 30,
+      padding: "8px",
+      backgroundColor: "white",
+    }}>
+      <h4 style={{
+        color: "#1530EF",
+        fontSize: "16px"
+      }}>Price</h4>
+
+      <p style={{
+        fontSize: "20px",
+        fontWeight: "bold"
+      }}> {linePrice?.value} </p>
+
+      <p style={{
+        fontSize: "14px"
+      }}> {linePrice?.time} </p>
+    </div>
     <Logo />
   </div>;
 };
