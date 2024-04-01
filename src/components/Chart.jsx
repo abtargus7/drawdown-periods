@@ -130,7 +130,7 @@ export const Chart = ({ data, periodData }) => {
           tooltipRef.current.style.top = coordinate + 'px';
 
           setLinePrice(data);
-        }
+        } 
       });
 
       lineSeries.setData(formattedData);
@@ -146,7 +146,7 @@ export const Chart = ({ data, periodData }) => {
 
   }, []);
 
-  return <div className='w-full h-2/3 m-0 p-0 relative' ref={chartContainerRef}>
+  return <div className='w-full m-0 p-0 relative' ref={chartContainerRef}>
     <div ref={tooltipRef} style={{
       position: "absolute",
       width: 100,
